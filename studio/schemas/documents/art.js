@@ -1,8 +1,8 @@
 import {format,parseISO} from 'date-fns'
 
 export default {
-  name: 'sampleProject',
-  title: 'Sample project',
+  name: 'art',
+  title: 'Art',
   type: 'document',
   fields: [
     {
@@ -32,14 +32,9 @@ export default {
       type: 'simplePortableText'
     },
     {
-      name: 'startedAt',
-      title: 'Started at',
-      type: 'datetime'
-    },
-    {
-      name: 'endedAt',
-      title: 'Ended at',
-      type: 'datetime'
+      name: 'previewImage',
+      title: 'Preview image',
+      type: 'figure'
     },
     {
       name: 'mainImage',
@@ -51,17 +46,6 @@ export default {
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}]
-    },
-    {
-      name: 'body',
-      title: 'Body',
-      type: 'projectPortableText'
-    },
-    {
-      name: 'relatedProjects',
-      title: 'Related projects',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'sampleProject'}}]
     }
   ],
   preview: {

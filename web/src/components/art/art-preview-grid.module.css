@@ -1,8 +1,8 @@
-@import '../styles/custom-media.css';
-@import '../styles/custom-properties.css';
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
 
 .root {
-  margin: 2em 0 4em;
+  margin-bottom: 4em;
 }
 
 .headline {
@@ -20,7 +20,7 @@
   list-style: none;
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 2em;
+  grid-gap: 0;
 
   @media (--media-min-small) {
     grid-template-columns: 1fr 1fr;
@@ -32,7 +32,7 @@
 }
 
 .browseMoreNav {
-  composes: small from './typography.module.css';
+  composes: small from './../typography.module.css';
   margin-top: 1rem;
   text-align: right;
 

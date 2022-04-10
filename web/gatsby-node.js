@@ -5,9 +5,46 @@ const {isFuture,parseISO} = require('date-fns')
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+// async function createProjectPages (graphql, actions) {
+//   const {createPage} = actions
+//   const result = await graphql(`
+//     {
+//       allSanitySampleProject(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
+//         edges {
+//           node {
+//             id
+//             publishedAt
+//             slug {
+//               current
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `)
+
+//   if (result.errors) throw result.errors
+
+//   const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
+
+//   projectEdges
+//     .filter(edge => !isFuture(parseISO(edge.node.publishedAt)))
+//     .forEach(edge => {
+//       const id = edge.node.id
+//       const slug = edge.node.slug.current
+//       const path = `/project/${slug}/`
+
+//       createPage({
+//         path,
+//         component: require.resolve('./src/templates/project.js'),
+//         context: {id}
+//       })
+//     })
+// }
+
 async function createProjectPages (graphql, actions) {
   const {createPage} = actions
-  const result = await graphql(`
+  const projects = await graphql(`
     {
       allSanitySampleProject(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
         edges {
@@ -21,25 +58,63 @@ async function createProjectPages (graphql, actions) {
         }
       }
     }
-  `)
+  `).then(result => {
+    if (result.errors) throw result.errors
 
-  if (result.errors) throw result.errors
+    const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
 
-  const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
+    projectEdges
+      .filter(edge => !isFuture(parseISO(edge.node.publishedAt)))
+      .forEach(edge => {
+        const id = edge.node.id
+        const slug = edge.node.slug.current
+        const path = `/project/${slug}/`
 
-  projectEdges
-    .filter(edge => !isFuture(parseISO(edge.node.publishedAt)))
-    .forEach(edge => {
-      const id = edge.node.id
-      const slug = edge.node.slug.current
-      const path = `/project/${slug}/`
-
-      createPage({
-        path,
-        component: require.resolve('./src/templates/project.js'),
-        context: {id}
+        createPage({
+          path,
+          component: require.resolve('./src/templates/project.js'),
+          context: {id}
+        })
       })
-    })
+
+  })
+
+  const art = await graphql(`
+    {
+      allSanityArt(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
+        edges {
+          node {
+            id
+            publishedAt
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) throw result.errors
+
+    const projectEdges = (result.data.allSanityArt || {}).edges || []
+
+    projectEdges
+      .filter(edge => !isFuture(parseISO(edge.node.publishedAt)))
+      .forEach(edge => {
+        const id = edge.node.id
+        const slug = edge.node.slug.current
+        const path = `/art/${slug}/`
+
+        createPage({
+          path,
+          component: require.resolve('./src/templates/art.js'),
+          context: {id}
+        })
+      })
+  });  
+
+  return Promise.all([projects, art])
+
 }
 
 exports.createPages = async ({graphql, actions}) => {
