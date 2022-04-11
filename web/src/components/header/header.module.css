@@ -25,10 +25,10 @@
 
   @nest & a {
     display: inline-block;
-    padding: 0.3em;
+    padding-top: 0.3em;
     color: inherit;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: 700;
 
     @media (hover: hover) {
@@ -41,6 +41,10 @@
   @nest & div {
     font-size: .8em;
   }
+}
+
+.tagline {
+  letter-spacing: 0.05em;
 }
 
 .nav {

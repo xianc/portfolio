@@ -2,6 +2,11 @@
 
 .root {
   margin: 2rem 0;
+  text-align: center;
+
+ /* @nest & img {
+  	max-height: 700px;
+  }*/
 
   @nest & figcaption {
     font-size: var(--font-small-size);

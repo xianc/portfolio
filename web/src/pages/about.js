@@ -19,6 +19,19 @@ import { responsiveTitle2 } from "../components/typography.module.css";
 //   }
 // `;
 
+// const query = `*[_type == "person" && _id == $id] {
+//   _id,
+//   name,
+//   "imageUrl": image.asset->url,
+//   "actedIn": *[_type == "movie" && references(^._id) && (^._id in castMembers[].person._ref)] {
+//     _id,
+//     title,
+//     releaseDate,
+//     "posterUrl": poster.asset->url
+//   }
+// }[0]
+// `
+
 // export const query = graphql`
 //   query PersonQuery {
 //     sanityPerson {

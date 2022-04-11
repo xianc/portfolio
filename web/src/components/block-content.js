@@ -9,6 +9,10 @@ const components = {
   }
 };
 
-const BlockContent = ({ blocks }) => <PortableText value={blocks} components={components} />;
+const BlockContent = ({ blocks }) => {
+	console.log('blocks', blocks);
+	return <PortableText value={blocks} components={components} />
+};
 
 export default BlockContent;
+

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import favicon from '../images/favicon.ico'
 import Helmet from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 
@@ -14,7 +15,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         return (
           <Helmet
             htmlAttributes={{ lang }}
-            title={title}
+            title="Xian Chen | Front-end Developer x Product Manager"
             titleTemplate={title === siteTitle ? "%s" : `%s | ${siteTitle}`}
             meta={[
               {
@@ -59,7 +60,9 @@ function SEO({ description, lang, meta, keywords, title }) {
                   : []
               )
               .concat(meta)}
-          />
+          >
+            <link rel="icon" href={favicon} />
+          </Helmet>
         );
       }}
     />
